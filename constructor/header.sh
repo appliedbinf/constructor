@@ -438,7 +438,8 @@ mkdir -p $PREFIX/envs
 if [ "$SKIP_SCRIPTS" = "1" ]; then
     printf "WARNING: skipping post_install.sh by user request\\n" >&2
 else
-    if ! $RUNNING_SHELL "$PREFIX/pkgs/post_install.sh $PREFIX"; then
+    chmod +x $PREFIX/pkgs/post_install.sh
+    if ! $PREFIX/pkgs/post_install.sh "$PREFIX"; then
         printf "ERROR: executing post_install.sh failed\\n" >&2
         exit 1
     fi
